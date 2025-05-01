@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 app.use('/webhook', githubRoutes);
 
 app.get('/', (req, res) => {
-  res.send('PR Buddy AI is running');
+  res.send('PR Buddy AI is running..');
 });
 
 // Error handling
