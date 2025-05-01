@@ -10,7 +10,7 @@ export async function summarizePRChanges(diffUrl) {
   const input = `Summarize the changes in the PR diff at this URL: ${diffUrl}`;
 
   const response = await client.chat.completions.create({
-    model: 'gpt-4',
+    model: 'gpt-3.5-turbo',
     messages: [
       { role: 'system', content: 'You are a helpful assistant.' },
       { role: 'user', content: input },
