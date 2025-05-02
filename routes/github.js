@@ -86,11 +86,62 @@ router.post('/:email', async (req, res) => {
       },
     });
 
-    const htmlTemplate = fs.readFileSync('/emailTemplate.html', 'utf8') // or embed it directly
-      .replace('{{repo}}', repository.full_name)
-      .replace('{{title}}', pull_request.title)
-      .replace('{{summary}}', summary.replace(/\n/g, '<br>'))
-      .replace('{{url}}', pull_request.html_url);
+    const htmlTemplate = `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>PR Summary</title>
+      <style>
+        body {
+          font-family: Arial, sans-serif;
+          background-color: #f4f4f4;
+          padding: 20px;
+        }
+        .container {
+          background-color: #ffffff;
+          padding: 20px;
+          border-radius: 5px;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+          font-size: 24px;
+          font-weight: bold;
+          margin-bottom: 20px;
+        }
+        .content {
+          font-size: 16px;
+          color: #333;
+          line-height: 1.5;
+        }
+        .footer {
+          margin-top: 30px;
+          font-size: 12px;
+          color: #888;
+          text-align: center;
+        }
+        a {
+          color: #3498db;
+          text-decoration: none;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="header">PR #${pull_request.number}: ${pull_request.title}</div>
+        <div class="content">
+          <p><strong>Repository:</strong> ${repository.full_name}</p>
+          <p><strong>Summary:</strong><br>${summary.replace(/\n/g, '<br>')}</p>
+          <p><a href="${pull_request.html_url}" target="_blank">View Pull Request</a></p>
+        </div>
+        <div class="footer">
+          <p>This is an automated message from PR Buddy.</p>
+        </div>
+      </div>
+    </body>
+    </html>
+    `;
 
     const mailOptions = {
       from: process.env.EMAIL_USER,
@@ -98,6 +149,7 @@ router.post('/:email', async (req, res) => {
       subject: `PR #${pull_request.number} Summary`,
       html: htmlTemplate
     };
+
 
     await transporter.sendMail(mailOptions);
 
