@@ -106,7 +106,7 @@ router.post('/:email', async (req, res) => {
     });
 
   } catch (error) {
-    console.error('Webhook handling failed:', error.message);
+    console.error('Webhook handling failed:', error);
 
     const errorHtmlTemplate = `
       <div style="font-family: Arial, sans-serif; padding: 20px; border: 1px solid #e00; background-color: #fff5f5;">
