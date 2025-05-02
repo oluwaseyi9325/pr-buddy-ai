@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+      color: #333;
+    }
+    .container {
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 24px;
+      max-width: 600px;
+      margin: auto;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .header {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 16px;
+      color: #2c3e50;
+    }
+    .section {
+      margin-bottom: 12px;
+    }
+    .label {
+      font-weight: bold;
+      color: #555;
+    }
+    .footer {
+      margin-top: 24px;
+      font-size: 13px;
+      color: #777;
+    }
+    .button {
+      display: inline-block;
+      background-color: #2c3e50;
+      color: #fff;
+      padding: 10px 16px;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-top: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header"> PR-BUDDY-AI Pull Request Summary</div>
+
+    <div class="section">
+      <span class="label">Repository:</span> {{repo}}
+    </div>
+    <div class="section">
+      <span class="label">PR Title:</span> {{title}}
+    </div>
+    <div class="section">
+      <span class="label">Summary:</span>
+      <p>{{summary}}</p>
+    </div>
+
+    <a href="{{url}}" class="button">View Pull Request</a>
+
+    <div class="footer">
+      This summary was generated automatically by PR Buddy using Gemini AI.
+    </div>
+  </div>
+</body>
+</html>
